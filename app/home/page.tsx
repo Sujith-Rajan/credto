@@ -6,7 +6,7 @@ import Brands from '../components/Brands'
 
 const LandingPage = () => {
   return (
-    <div className='w-full pt-24'>
+    <div className='w-full pt-24 relative'>
       <Banner/>
       <Offer/>
       <Products/>

@@ -183,3 +183,30 @@ export const brands = [
         image: sony,
     },
 ]
+
+import blue from '../../public/products/IphoneBlue.jpg'
+import purple from '../../public/products/iPhonePurpule.jpg'
+import silver from '../../public/products/iPhoneSilver.jpg'
+import { title } from "process";
+
+
+export const products = [
+    {
+        id: 1,
+        title:"Iphone-15 Blue",
+        image: blue,
+        colour:"blue",
+    },
+    {
+        id: 2,
+        title:"Iphone-15 Purple",
+        image: purple,
+        colour:"purple",
+    },
+    {
+        id: 3,
+        title:"Iphone-15 Silver",
+        image: silver,
+        colour:"silver",
+    }
+]
