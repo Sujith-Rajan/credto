@@ -17,11 +17,7 @@ export default async function getProductId(params:Params) {
         if(!product){
             return null
         }
-        return {
-            ...product,
-            createdAt: product.createdAt.toString(),
-           
-        }
+        return product
     }
     catch(error: any){
         throw new Error(error)

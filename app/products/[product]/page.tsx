@@ -7,9 +7,12 @@ interface IParams {
     product?: string;
 }
 
+
 const SingleProduct: React.FC<{ params: IParams }> = async ({params}) => {
     const productId = params.product;
     const singleProduct = await getProductId({productId})
+
+   
    
     return (
         <div className='h-auto pt-36 mb-8'>
