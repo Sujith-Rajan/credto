@@ -27,7 +27,7 @@ const CartModal: React.FC<CartModalProps> = ({ setCartPopup }) => {
   }
 
   return (
-    <div className='w-full bg-black bg-opacity-50 h-screen absolute top-0 z-40'>
+    <div className='w-full bg-black bg-opacity-50 h-screen absolute top-0 z-auto'>
       <div className='w-[400px] bg-white h-screen absolute right-0 flex flex-col items-start p-4'>
         <div className='p-4'>
           <IoIosCloseCircle size={22} onClick={() => setCartPopup()} />

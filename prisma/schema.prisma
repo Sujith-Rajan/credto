@@ -52,7 +52,7 @@ model Product {
   imageSrc      String
   createdAt     DateTime      @default(now())
   category      String
-  color         String
+  color         String[]
   inStock       Boolean      @default(true)
   price         Int
   offer         Int

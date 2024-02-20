@@ -9,7 +9,7 @@ const Products = async () => {
     const products = await getProducts()
    
     return (
-        <div className='mt-8 p-20'>
+        <div className=' p-20'>
                 <Container>
                 <div className='flex flex-col md:flex-row  justify-between'>
                     <h2 className='font-bold text-xl md:text-4xl'>All Products</h2>
@@ -19,7 +19,7 @@ const Products = async () => {
                     <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 '>
                        {products.map((product)=>(
                         <Link href={`/products/${product.id}`} className='flex flex-col justify-center items-center gap-1 border border-gray-400 relative p-2' key={product.id}>
-                            <div className='absolute left-2 top-2 bg-green-600 text-white px-2  text-xs z-10'>
+                            <div className='absolute left-2 top-2 bg-green-600 text-white px-2  text-xs z-auto'>
                                HOT
                             </div>
                             <div className=' shrink-0'>

@@ -10,8 +10,8 @@ const Footer = () => {
   return (
     <div className='w-full border-t-[1px] border-gray-400'>
       <Container>
-        <div className='md:flex mt-8 mb-8 gap-10'>
-          <div className=' md:flex flex-1 justify-between'>
+        <div className='lg:flex mt-8 mb-8 gap-10'>
+          <div className=' flex flex-1 justify-between flex-wrap'>
             {footerLinks.map((item, index) => (
               <ul key={index} className='flex flex-col gap-2'>
                 <li className='font-bold uppercase '>{item.title}</li>
@@ -42,7 +42,7 @@ const Footer = () => {
 
       <div className='w-full bg-gray-200 '>
         <Container>
-          <div className='grid md:grid-cols-2 py-4 '>
+          <div className='grid md:grid-cols-1 lg:grid-cols-2 py-4 '>
             <div className='flex flex-col gap-2'>
             {devices.map((item, index) => (
               <ul className=' flex  gap-2' key={index}>

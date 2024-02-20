@@ -12,20 +12,26 @@ const Login = () => {
         <div className='flex flex-col gap-4 md:gap-8 justify-center items-center w-full'>
             <div className='flex flex-col gap-2 justify-center items-center w-full'>
             <h1 className=' text-sm sm:justify-center md:text-xl font-bold'>Login/Register to your account</h1>
-            <span className='text-sm text-gray-500 hidden md:flex'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas placeat quia earum neque</span>
+            <span className='text-sm text-gray-500 hidden md:flex'>Lorem ipsum dolor sit 
+            amet consectetur adipisicing elit. Voluptas placeat quia earum neque</span>
             </div>
             <div className='flex flex-col gap-4 justify-center items-center w-full'>
-                <input type="text" className='border border-gray-400 focus:outline-none p-3 w-[300px] md:w-[540px] placeholder:text-black' placeholder ="Enter Mobile Number"/>
+                <input type="text" className='border border-gray-400 focus:outline-none
+                 p-3 w-[300px] md:w-[540px] placeholder:text-black' placeholder ="Enter Mobile Number"/>
                 <span className='text-gray-500'>OR</span>
+
                 <button className='border border-gray-400 focus:outline-none p-3 
                 w-[300px] md:w-[540px] bg-white font-bold flex items-center 
-                justify-center gap-4'><FcGoogle size={22}/>Login with Google</button>
+                justify-center gap-4' onClick={()=>signIn('google')}><FcGoogle size={22}/>Login with Google</button>
+
                 <button className='border border-gray-400 focus:outline-none p-3 
                 w-[300px] md:w-[540px] bg-white font-bold flex items-center 
-                justify-center gap-4' onClick={()=>signIn('github')}><FaGithub size={22} />Sign in with Github</button>
+                justify-center gap-4' onClick={()=>signIn('github')}>
+                  <FaGithub size={22} />Sign in with Github</button>
 
             </div>
-            <button className='px-8 py-4 bg-cyan-600 text-white uppercase w-max font-bold'>GET OTP</button>
+            <button className='px-8 py-4 bg-cyan-600 text-white 
+            uppercase w-max font-bold cursor-progress' title='Please log in to use any of the providers above.'>GET OTP</button>
         </div>
 
       

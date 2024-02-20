@@ -8,7 +8,7 @@ export default async function getProductId(params:Params) {
     
     try {
         const {productId} = params;
-        console.log("serverr",productId)
+       
         const product = await prisma.product.findUnique({
             where:{
                 id:productId,

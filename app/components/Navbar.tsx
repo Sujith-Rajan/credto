@@ -8,16 +8,22 @@ import Link from 'next/link';
 import WhishListModal from '../modals/WhishListModal';
 import CartModal from '../modals/CartModal';
 import { SafeUser } from '../types';
+import { useSelector } from 'react-redux';
 
 
 interface NavbarProps {
    
     currentUser: SafeUser | null
+    
 }
 
 const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
+
+    const {quantity} = useSelector((state) => state.cart)
+
     const [wishPopus, setWhishPopup] = useState(false)
     const [cartPopup, setCartPopup] = useState(false)
+
     return (
         <div className='w-full fixed z-10 py-4  bg-white'>
             <Container>
@@ -36,6 +42,7 @@ const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
                                 <IoSearch size={18} />
                             </button>
                         </div>
+
                         <div className='bg-gray-300 rounded-full p-1 cursor-pointer'>
                           {currentUser
                            ? 
@@ -44,10 +51,16 @@ const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
                            :
                            <FaUser />}  
                         </div>
+
                         <div className='bg-gray-300 rounded-full p-1 cursor-pointer'
                          onClick={() => setWhishPopup(true)}><FaHeart size={20}/></div>
-                        <div className='bg-gray-300 rounded-full p-1 cursor-pointer' 
-                        onClick={() => setCartPopup(true)}><FaShoppingCart size={20} /></div>
+
+                        <div className='bg-gray-300 rounded-full p-1 cursor-pointer relative' 
+                        onClick={() => setCartPopup(true)}><FaShoppingCart size={20} />
+                        <span className='w-auto h-auto p-1 flex items-center justify-center absolute -top-5 right-0 bg-red-400 text-xs 
+                        rounded-full text-white font-bold'><p>{quantity}</p></span>
+                        </div>
+                        
                     </div>
                 </div>
 

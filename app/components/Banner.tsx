@@ -43,7 +43,7 @@ const Banner = () => {
       </div>
     
       </div>
-      <div  className='z-10 bg-gray-300 w-8 h-8 p-2 rounded-full text-white absolute top-1/2  right-4  hover:bg-gray-400'
+      <div  className='z-auto bg-gray-300 w-8 h-8 p-2 rounded-full text-white absolute top-1/2  right-4  hover:bg-gray-400'
        onClick={()=>handleClick("right")}>
       <FaChevronRight />
       </div>

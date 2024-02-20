@@ -38,12 +38,12 @@ const Products = async () => {
                                 <Image src={product.imageSrc} alt='products image' width="200" height="150"  />
                             </div>
                             <div className='flex gap-1'>
-                                <>
+                                <div className='flex flex-col'>
                             <p className='text-blue-500 text-xs'>{product.description}</p>
                             <h3 className='font-bold text-sm'>{product.title}</h3>
                             <h4><span className='text-gray-500'>OMR</span><span className='font-bold'>{product.offer} </span>
                              <span className='text-gray-500'><s>{product.price}</s></span></h4>
-                             </>
+                             </div>
                             <div >
                             <CiCirclePlus size={25} className='hover:bg-blue-500 rounded-full hover:text-white'/>
                             </div>

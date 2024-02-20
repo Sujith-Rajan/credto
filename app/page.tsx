@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import getCurrentUser from "./actions/getCurrentUser";
 import LandingPage from "./home/page";
 
+
 export default async function Home() {
 
   const currentUser = await getCurrentUser()
@@ -12,7 +13,9 @@ export default async function Home() {
 
   return (
     <div>
+     
       <LandingPage/>
+     
     </div>
   );
 }
