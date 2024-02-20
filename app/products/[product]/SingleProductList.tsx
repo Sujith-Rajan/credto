@@ -1,12 +1,17 @@
 "use client"
 import Container from '@/app/components/common/Container';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { products } from '@/app/data/item';
 import { SafeProduct } from '@/app/types';
-import { useDispatch } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '@/app/redux/cartSlice';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import MessageModal from '@/app/modals/MessageModal';
+import { FaRegHeart } from "react-icons/fa"
+import { FaHeart } from "react-icons/fa"
+import { wishProduct, wishRemoveProduct } from '@/app/redux/wishListSlice';
 
 interface SingleProductListProps {
     singleProduct?: SafeProduct | null;
@@ -14,38 +19,80 @@ interface SingleProductListProps {
 
 type Res = "inc" | "dec"
 
+
 const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) => {
 
-   const router = useRouter() 
-   const  dispatch = useDispatch()
-    const [color,setColor] = useState("")
-    const[cartCount,setCartCount] = useState(1)
+    const router = useRouter()
+    const dispatch = useDispatch()
+    const [color, setColor] = useState("")
+    const [cartCount, setCartCount] = useState(1)
+    const [message, setMessage] = useState(false)
+    const [inWishlist, setInWishlist] = useState(false);
+
+
 
     const cartChange = (res: Res) => {
-        if(res === 'inc'){
-          setCartCount(cartCount + 1)
+        if (res === 'inc') {
+            setCartCount(cartCount + 1)
         }
-        else if(res === 'dec'){
-           cartCount > 1 && setCartCount(cartCount - 1)
+        else if (res === 'dec') {
+            cartCount > 1 && setCartCount(cartCount - 1)
         }
-      }
+    }
 
 
     const handleAddToCart = () => {
         dispatch(
-            addProduct({...singleProduct,quantity: cartCount,color})
+            addProduct({ ...singleProduct, quantity: cartCount, color })
         )
-        router.push("/cart")
+        toast.success("New Product Added To Cart")
+        setMessage(true)
     }
 
+    const { products } = useSelector((state) => state.wish)
+
+    useEffect(() => {
+        if (singleProduct) {
+            const isInWishlist = products.find((product) => singleProduct.id)
+            setInWishlist(isInWishlist);
+        }
+    }, [singleProduct]);
+    const handleWishListToggle = () => {
+        if (inWishlist) {
+            dispatch(wishRemoveProduct(singleProduct.id)); // Remove from wishlist
+            toast.success("Item removed from wishlist");
+        } else {
+            dispatch(wishProduct(singleProduct)); // Add to wishlist
+            toast.success("Item added to wishlist");
+        }
+        setInWishlist(!inWishlist); // Toggle inWishlist state
+    };
+
+
     return (
-        <div className='h-auto pt-36 mb-8'>
+        <div className='h-auto  mb-8'>
             <Container>
 
-                <div className='w-full flex flex-wrap gap-2 md:gap-4 md:justify-evenly' >
+                <div className='w-full flex flex-wrap gap-2 md:gap-4 justify-evenly' >
                     <div className='flex flex-col items-center md:gap-4'>
                         <div className='w-[220px] h-[200px] relative lg:w-[400px] lg:h-[400px]'>
                             <Image src={singleProduct?.imageSrc as string} alt="single product image" fill objectFit='contain' />
+                            <div className='absolute right-0 '>
+                                {inWishlist ? (
+                                    <FaHeart
+                                        size={22}
+                                        title="Remove from wishlist"
+                                        className='fill-pink-600'
+                                        onClick={handleWishListToggle}
+                                    />
+                                ) : (
+                                    <FaRegHeart
+                                        size={22}
+                                        title="Add to wishlist"
+                                        onClick={handleWishListToggle}
+                                    />
+                                )}
+                            </div>
                         </div>
                         <div className='flex gap-4'>
                             {singleProduct?.category === "Mobile" &&
@@ -85,20 +132,20 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
                             <div className='flex  gap-1 bg-pink'>
                                 <span>color:</span>
                                 {singleProduct?.color?.map((c) => (
-                                    <div className="w-5 h-5 rounded-full cursor-pointer border border-black " 
-                                    style={{
-                                        backgroundColor: c,
-                                        border: color === c ? '2px solid black' : ""
-                                    }}  key={c} onClick={()=> setColor(c)}></div>
+                                    <div className="w-5 h-5 rounded-full cursor-pointer border border-black "
+                                        style={{
+                                            backgroundColor: c,
+                                            border: color === c ? '2px solid black' : ""
+                                        }} key={c} onClick={() => setColor(c)}></div>
                                 ))}
 
                             </div>
                             <hr />
                             <div className='flex flex-col md:flex-row gap-1 md:gap-4 mt-8'>
                                 <div className='flex items-center'>
-                                    <button className='border border-gray-400 p-2' onClick={()=>cartChange('inc')}>+</button>
+                                    <button className='border border-gray-400 p-2' onClick={() => cartChange('inc')}>+</button>
                                     <div className='md:p-2'>{cartCount}</div>
-                                    <button className='border border-gray-400 p-2' onClick={()=>cartChange('dec')}>-</button>
+                                    <button className='border border-gray-400 p-2' onClick={() => cartChange('dec')}>-</button>
                                 </div>
                                 <button className='bg-black p-2 md:p-4 text-white' onClick={handleAddToCart}>ADD TO CART</button>
                             </div>
@@ -108,6 +155,7 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
                 </div>
 
             </Container>
+            {message && <MessageModal setMessage={() => setMessage(false)} />}
         </div>
     );
 };

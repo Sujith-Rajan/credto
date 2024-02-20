@@ -19,7 +19,7 @@ interface NavbarProps {
 
 const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
 
-    const {quantity} = useSelector((state) => state.cart)
+    const {quantity,products} = useSelector((state) => state.cart)
 
     const [wishPopus, setWhishPopup] = useState(false)
     const [cartPopup, setCartPopup] = useState(false)
@@ -57,8 +57,9 @@ const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
 
                         <div className='bg-gray-300 rounded-full p-1 cursor-pointer relative' 
                         onClick={() => setCartPopup(true)}><FaShoppingCart size={20} />
-                        <span className='w-auto h-auto p-1 flex items-center justify-center absolute -top-5 right-0 bg-red-400 text-xs 
-                        rounded-full text-white font-bold'><p>{quantity}</p></span>
+                        {products.length > 0 && <span className='w-auto h-auto p-1 flex items-center justify-center absolute -top-5 right-0 bg-red-400 text-xs 
+                        rounded-full text-white font-bold'><p>{products.length}</p></span> }
+                        
                         </div>
                         
                     </div>

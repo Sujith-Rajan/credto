@@ -2,6 +2,7 @@
 import { combineReducers, configureStore as createStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import cartSlice from './cartSlice'
+import wishListSlice from './wishListSlice'
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 
 const createNoopStorage = () => {
@@ -25,6 +26,7 @@ const persistConfig = {
 }
 const rootReducer = combineReducers({
   cart: cartSlice,
+  wish: wishListSlice,
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

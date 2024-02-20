@@ -1,13 +1,32 @@
 "use client"
 import Image from 'next/image'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { cartClear, updateProductQuantity } from '../redux/cartSlice'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 const Cart = () => {
+    const dispatch = useDispatch()
+    const router = useRouter()
+    const {products,total,quantity} = useSelector((state) => state.cart)
+   
+   
+    const handleUpdateCart = (productId, quantity) => {
+        dispatch(updateProductQuantity({ productId, quantity }));
+        toast.success("Cart Updated")
+    }
 
-    const [count,setCount] = useState(1)
+    const handleOrderComplete = () => {
+     dispatch(
+            cartClear()
+        )
+        router.push("/success")
+    }
 
-    const price = 50000
-    const subtotal = price * count;
+    const upDateCart = () => {
+        toast.success("Cart Updated")
+    }
 
   return (
     <div className='h-auto pt-20 md:p-36 '>
@@ -26,23 +45,27 @@ const Cart = () => {
                     </tr>
                     </thead>
                     <tbody>
+                        {products.map((item)=> (
                         <tr className='font-bold text-xs md:text-sm text-center border-b border-gray-300 whitespace-nowrap'>
-                            <td className='flex flex-col md:flex-row md:gap-4 gap-2 md:items-center'>
-                                <Image src="/iphone.jpg" alt='cart image' width={40} height={40}/>
-                                <p>Airpods Max</p>
+                            <td className='flex flex-col items-center md:flex-row md:gap-4 gap-2 md:items-center'>
+                                <Image src={item.imageSrc} alt='cart image' width={40} height={40}/>
+                                <p>{item.title}</p>
                             </td>
                             <td>
-                                OMR 50,0000.00
+                                OMR {item.offer}
                             </td>
                             <td className='flex gap-2 items-center justify-center'>
-                                <div className='border border-gray-400 shrink-0 p-2 cursor-pointer' onClick={()=>setCount(count + 1)}>+</div>
-                                <div>{count}</div>
-                                <div className='border border-gray-400 shrink-0 p-2 cursor-pointer'  onClick={()=>{count > 0 && setCount(count - 1) }}>-</div>
+                            <div className='border border-gray-400 shrink-0 p-2 cursor-pointer' 
+                            onClick={() => handleUpdateCart(item.id, item.quantity + 1)}>+</div>
+                                <div>{item.quantity}</div>
+                                <div className='border border-gray-400 shrink-0 p-2 cursor-pointer'
+                                 onClick={() => handleUpdateCart(item.id, item.quantity - 1)}>-</div>
                             </td>
                             <td>
-                            OMR {subtotal}.00
+                            OMR {item.quantity * item.offer}.00
                             </td>
                         </tr>
+                        ))}
                     </tbody>
                 </table>
                 <div className='flex justify-between mt-8 gap-2'>
@@ -50,21 +73,26 @@ const Cart = () => {
                         <input type="text" placeholder='Coupon code'/>
                         <button className='bg-black px-4 py-2 text-white text-xs'>APPLY COUPON</button>
                     </div>
-                    <button className='bg-slate-100 border border-black px-4 py-2 font-bold text-xs'>UPDATE CART</button>
+                    <button className='bg-slate-100 border border-black
+                     px-4 py-2 font-bold text-xs hover:bg-black hover:text-white' onClick={upDateCart}>UPDATE CART</button>
                  </div>    
             </div>
             <div className='border border-gray-400 p-4 flex flex-col mt-8 gap-4 md:w-1/4'>
                 <h2 className='font-bold text-lg md:text-xl'>Cart Totals</h2>
                 <div className='flex justify-between'>
                     <p className='font-bold'>Subtotal</p>
-                    <p>OMR {subtotal}.00</p>
+                    <p>OMR {total}.00</p>
                 </div>
                 <hr />
                 <div className='flex justify-between'>
                     <p className='font-bold'>Total</p>
-                    <p className='font-extrabold'>OMR {subtotal}.00</p>
+                    <p className='font-extrabold'>OMR {total}.00</p>
                 </div>
-                <button className='w-full bg-cyan-600 text-white font-bold text-sm p-4'> PROCEED TO CHECKOUT</button>
+              
+                <button className='w-full bg-cyan-600 text-white
+                 font-bold text-sm p-4' onClick={handleOrderComplete}> PROCEED TO CHECKOUT</button>
+                
+               
             </div>
         </div>
      

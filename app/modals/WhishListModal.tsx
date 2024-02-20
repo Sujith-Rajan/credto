@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import React from 'react'
 import { IoIosCloseCircle } from "react-icons/io";
 import { IoIosCloseCircleOutline } from "react-icons/io"
+import { useDispatch, useSelector } from 'react-redux';
+import { wishRemoveProduct } from '../redux/wishListSlice';
 
 interface WhishListModalProps {
   setWhishPopup: () => void;
@@ -13,18 +15,23 @@ type Direction = "cart" | "wish";
 
 const WhishListModal: React.FC<WhishListModalProps> = ({ setWhishPopup }) => {
 
-
+  const {products} = useSelector((state)=> state.wish)
+  const dispatch = useDispatch()
   const router = useRouter()
   const handleRedirect = (direction: Direction) => {
-    if(direction === 'cart'){
+    if (direction === 'cart') {
       router.push("/cart")
       setWhishPopup()
     }
 
-    if(direction === 'wish'){
+    if (direction === 'wish') {
       router.push("/wishlist")
       setWhishPopup()
     }
+  }
+
+  const handleRemoveWish = (id) => {
+    dispatch(wishRemoveProduct(id))
   }
 
   return (
@@ -36,29 +43,26 @@ const WhishListModal: React.FC<WhishListModalProps> = ({ setWhishPopup }) => {
           <h1 className='font-bold text-xl'>Wishlist</h1>
         </div>
         <hr />
-
+        {products.map((item)=> (
         <div className='mt-8 flex p-4 gap-4 relative'>
           <div>
-            <Image src="/products/iphoneBlue.jpg" alt="whishlist product" width={40} height={40} />
+            <Image src={item.imageSrc} alt="whishlist product" width={40} height={40} />
           </div>
           <div>
-            <p className='font-bold'>Iphone 15 pro</p>
-            <p className='font-bold'>256 GB -Blue</p>
-            <span className='text-gray-500'>1 x OMR 46990</span>
+            <p className='font-bold'>{item.title}</p>
+            <p className='font-bold'>256 GB -</p>
+            <span className='text-gray-500'>1 x OMR {item.offer} <>{item.price}</></span>
           </div>
-          <IoIosCloseCircleOutline  className='text-gray-500 hover:text-gray-600'/>
+          <IoIosCloseCircleOutline className='text-gray-500 hover:text-white bg-red-600 rounded-full ' onClick={()=>handleRemoveWish(item.id)}/>
         </div>
-
-        <div className='flex justify-between gap-8 p-4'>
-          <p className='font-bold'>Subtotal</p>
-          <p className='font-bold'>OMR 46990</p>
-        </div>
+      ))}
+       
         <hr />
         <div className='flex flex-col gap-4 p-4 '>
-        
-            <button className=' w-full px-4 py-2 border border-black' onClick={()=>handleRedirect("wish")}>VIEW WISHLIST</button>
-            <button className=' w-full px-4 py-2 bg-black text-white' onClick={()=>handleRedirect("cart")}>ADD TO CART</button>
-       
+
+          <button className=' w-full px-4 py-2 border border-black' onClick={() => handleRedirect("wish")}>VIEW WISHLIST</button>
+          <button className=' w-full px-4 py-2 bg-black text-white' onClick={() => handleRedirect("cart")}>ADD TO CART</button>
+
         </div>
 
 

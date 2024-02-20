@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import getCurrentUser from "./actions/getCurrentUser";
 import PersistProvider from "./redux/Provider";
+import ToastProvider from "./lib/ToastProvider";
 
 const font = Nunito ({
   subsets: ["latin"]
@@ -28,6 +29,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={font.className}>
       <PersistProvider>
+        <ToastProvider/>
         <Navbar currentUser={currentUser}/>
         {children}
         <Footer/>

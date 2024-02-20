@@ -1,9 +1,13 @@
+"use client"
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Wishlist = () => {
   
-
+   const{products} = useSelector((state)=> state.wish)
+   console.log(products)
   return (
     <div className='h-auto pt-20 md:p-36 '>
         <div className='bg-gray-200 flex items-center justify-center  p-2 lg:p-8'>
@@ -21,24 +25,32 @@ const Wishlist = () => {
                     </tr>
                     </thead>
                     <tbody>
+                        {products.map((item) => (
                         <tr className='font-bold text-xs md:text-sm text-center border-b border-gray-300 whitespace-nowrap'>
                             <td className='flex flex-col md:flex-row md:gap-4 gap-2 md:items-center'>
-                                <Image src="/iphone.jpg" alt='cart image' width={40} height={40}/>
-                                <p>Airpods Max</p>
+                                <Image src={item.imageSrc} alt='cart image' width={40} height={40}/>
+                                <p>{item.title}</p>
                             </td>
                             <td>
-                                OMR 50,0000.00
+                                OMR {item.offer}.00 <s>{item.price}.00</s>
                             </td>
                             <td className='flex gap-2 items-center justify-center'>
-                               In stock
+                               {item.inStock}
                             </td>
                             <td >
                                 <div className='flex justify-center gap-2'>
-                            <button className='bg-slate-100 border border-black p-1 md:px-4 md:py-2 font-bold text-xs'>QUICK VIEW</button>
-                            <button className='bg-black md:px-4 md:py-2 p-1 text-white text-xs'>ADD TO CART</button>
+                                    <Link href={`/products/${item.id}`}>
+                                    <button className='bg-slate-100 border border-black p-1 md:px-4 md:py-2 font-bold text-xs'>QUICK VIEW</button>
+                                    </Link>
+                                    <Link href={`/products/${item.id}`}>
+                                    <button className='bg-black md:px-4 md:py-2 p-1 text-white text-xs'>ADD TO CART</button>
+                                    </Link>
+                           
+                           
                             </div>
                             </td>
                         </tr>
+                        ))}
                     </tbody>
                 </table>
               

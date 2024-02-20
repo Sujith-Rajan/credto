@@ -1,8 +1,7 @@
 import { createSlice,PayloadAction  } from "@reduxjs/toolkit";
 
 interface Product {
-    // Define properties for a product
-    // For example:
+  
   id :string        
   title      :string
   description:string
@@ -14,10 +13,12 @@ interface Product {
   price       :  number
   offer       :  number
   }
-  
-  // Define the type for the cart state
+  interface CartProduct extends Product {
+    quantity: number;
+  }
+ 
   interface CartState {
-    products: Product[];
+    products: CartProduct[];
     quantity: number;
     total: number;
   }
@@ -32,14 +33,39 @@ const cartSlice = createSlice({
     name:"cart",
     initialState,
     
-    reducers:{
-            addProduct: (state,action) => {
+    reducers: {
+      addProduct: (state, action: PayloadAction<Product>) => {
                 state.quantity += 1;
                 state.products.push(action.payload);
-                state.total += action.payload.price * action.payload.quantity;
-            }
-    }
-})
-
-export const {addProduct} = cartSlice.actions;
-export default cartSlice.reducer;
+                state.total += action.payload.offer * action.payload.quantity;
+      },
+      updateProductQuantity: (state, action: PayloadAction<{ productId: string; quantity: number }>) => {
+        const { productId, quantity } = action.payload;
+        const productToUpdate = state.products.find(product => product.id === productId);
+        if (productToUpdate) {
+          const prevQuantity = productToUpdate.quantity;
+          productToUpdate.quantity = quantity;
+          state.quantity += quantity - prevQuantity; 
+          state.total += (quantity - prevQuantity) * productToUpdate.offer; 
+        }},
+        removeProduct: (state, action: PayloadAction<string>) => {
+          const productIdToRemove = action.payload;
+          const indexToRemove = state.products.findIndex(product => product.id === productIdToRemove);
+    
+          if (indexToRemove !== -1) {
+            const productToRemove = state.products[indexToRemove];
+            state.quantity -= productToRemove.quantity; 
+            state.total -= productToRemove.offer * productToRemove.quantity; 
+            state.products.splice(indexToRemove, 1);
+          }
+        },
+      cartClear : state => {
+        state.products = []; 
+        state.quantity = 0; 
+        state.total = 0; 
+      }
+    },
+  });
+  
+  export const { addProduct,cartClear,updateProductQuantity,removeProduct } = cartSlice.actions;
+  export default cartSlice.reducer;
