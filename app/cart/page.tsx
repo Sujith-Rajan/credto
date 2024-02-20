@@ -6,10 +6,24 @@ import { cartClear, updateProductQuantity } from '../redux/cartSlice'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 
+interface RootState {
+    cart: {
+        products: {
+            id: string;
+            title: string;
+            imageSrc: string;
+            offer: number;
+            quantity: number;
+        }[];
+        total: number;
+        quantity: number;
+    };
+}
+
 const Cart = () => {
     const dispatch = useDispatch()
     const router = useRouter()
-    const {products,total,quantity} = useSelector((state) => state.cart)
+    const {products,total,quantity} = useSelector((state:RootState) => state.cart)
    
    
     const handleUpdateCart = (productId, quantity) => {
