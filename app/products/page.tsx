@@ -5,7 +5,7 @@ import { getProducts } from '../actions/getProducts'
 import Link from 'next/link'
 
 const Products = async () => {
-
+    
     const products = await getProducts()
    
     return (

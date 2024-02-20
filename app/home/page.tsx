@@ -4,7 +4,12 @@ import Offer from '../components/Offer'
 import Products from '../components/Products'
 import Brands from '../components/Brands'
 
-const LandingPage = () => {
+
+const LandingPage =async () => {
+
+  
+ 
+  
   return (
     <div className='w-full pt-24 relative'>
       <Banner/>

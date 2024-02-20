@@ -1,10 +1,16 @@
 "use client"
+
 import { signIn } from 'next-auth/react';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
+
 const Login = () => {
+  
+
+  
+ 
   return (
     
       <div className='p-40 md:p-48 bg-gray-100 w-full '>
@@ -22,11 +28,11 @@ const Login = () => {
 
                 <button className='border border-gray-400 focus:outline-none p-3 
                 w-[300px] md:w-[540px] bg-white font-bold flex items-center 
-                justify-center gap-4' onClick={()=>signIn('google')}><FcGoogle size={22}/>Login with Google</button>
+                justify-center gap-4' onClick={()=>signIn('google',{redirect:true})}><FcGoogle size={22}/>Login with Google</button>
 
                 <button className='border border-gray-400 focus:outline-none p-3 
                 w-[300px] md:w-[540px] bg-white font-bold flex items-center 
-                justify-center gap-4' onClick={()=>signIn('github')}>
+                justify-center gap-4' onClick={()=>signIn('github',{redirect:true})}>
                   <FaGithub size={22} />Sign in with Github</button>
 
             </div>

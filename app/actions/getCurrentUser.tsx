@@ -17,9 +17,11 @@ const getCurrentUser = async () => {
                 email: session.user.email as string
             }
         })
+       
         if(!currentUser){
             return null
         }
+       
         return {
             ...currentUser,
             createdAt: currentUser.createdAt.toISOString(),
@@ -27,6 +29,10 @@ const getCurrentUser = async () => {
             emailVerified:
             currentUser.emailVerified?.toISOString() || null
         }
+       
+       
+       
+      
     }
     catch(error){
         return null
