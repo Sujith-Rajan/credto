@@ -4,9 +4,25 @@ import Link from 'next/link'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
+interface RootState {
+    wish: {
+        products: {
+            id: string;
+            title: string;
+            imageSrc: string;
+            offer: number;
+            quantity: number;
+            price:number
+        
+        }[];
+        total: number;
+        quantity: number;
+    };
+}
+
 const Wishlist = () => {
   
-   const{products} = useSelector((state)=> state.wish)
+   const{products} = useSelector((state: RootState)=> state.wish)
    console.log(products)
   return (
     <div className='h-auto pt-20 md:p-36 '>
@@ -35,7 +51,7 @@ const Wishlist = () => {
                                 OMR {item.offer}.00 <s>{item.price}.00</s>
                             </td>
                             <td className='flex gap-2 items-center justify-center'>
-                               {item.inStock}
+                               In Stock
                             </td>
                             <td >
                                 <div className='flex justify-center gap-2'>

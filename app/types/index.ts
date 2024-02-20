@@ -10,6 +10,3 @@ User,
 
 }
 
-export type SafeProduct = Omit<Product,"createdAt"> & {
-    createdAt : string;
-}

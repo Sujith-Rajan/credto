@@ -190,7 +190,7 @@ import silver from '../../public/products/iPhoneSilver.jpg'
 import { title } from "process";
 
 
-export const products = [
+export const productsData = [
     {
         id: 1,
         title:"Iphone-15 Blue",

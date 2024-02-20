@@ -2,8 +2,8 @@
 import Container from '@/app/components/common/Container';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { products } from '@/app/data/item';
-import { SafeProduct } from '@/app/types';
+import { productsData } from '@/app/data/item';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '@/app/redux/cartSlice';
 import { useRouter } from 'next/navigation';
@@ -12,6 +12,19 @@ import MessageModal from '@/app/modals/MessageModal';
 import { FaRegHeart } from "react-icons/fa"
 import { FaHeart } from "react-icons/fa"
 import { wishProduct, wishRemoveProduct } from '@/app/redux/wishListSlice';
+
+interface SafeProduct {
+    id: string;
+    title: string;
+    description: string;
+    imageSrc: string;
+    category: string;
+    color: string[];
+    inStock: boolean;
+    price: number;
+    offer: number;
+    createdAt: Date;
+}
 
 interface SingleProductListProps {
     singleProduct?: SafeProduct | null;
@@ -56,11 +69,14 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
 
 
     const handleAddToCart = () => {
+        if (singleProduct) {
         dispatch(
             addProduct({ ...singleProduct, quantity: cartCount})
         )
         toast.success("New Product Added To Cart")
         setMessage(true)
+        }
+        
     }
 
     const { products } = useSelector((state: RootState) => state.wish)
@@ -68,9 +84,11 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
     useEffect(() => {
         if (singleProduct) {
             const isInWishlist = products.find((product) => singleProduct.id)
-            setInWishlist(isInWishlist);
+            setInWishlist(!!isInWishlist);
         }
     }, [singleProduct,products]);
+
+
     const handleWishListToggle = () => {
         if (singleProduct && singleProduct.id) {
         if (inWishlist) {
@@ -82,6 +100,7 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
         }
         setInWishlist(!inWishlist); 
     }
+    
     };
 
 
@@ -112,7 +131,7 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
                         </div>
                         <div className='flex gap-4'>
                             {singleProduct?.category === "Mobile" &&
-                                products?.map((item) => (
+                                productsData?.map((item) => (
                                     <div className='flex gap-4' key={item.id}>
                                         <div
                                             className='hover:scale-75 transition-all duration-700 cursor-pointer'

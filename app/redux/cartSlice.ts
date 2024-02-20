@@ -12,6 +12,7 @@ interface Product {
   inStock    : Boolean     
   price       :  number
   offer       :  number
+  
   }
   interface CartProduct extends Product {
     quantity: number;
@@ -34,7 +35,7 @@ const cartSlice = createSlice({
     initialState,
     
     reducers: {
-      addProduct: (state, action: PayloadAction<Product>) => {
+      addProduct: (state, action: PayloadAction<CartProduct>) => {
                 state.quantity += 1;
                 state.products.push(action.payload);
                 state.total += action.payload.offer * action.payload.quantity;
