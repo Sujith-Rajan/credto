@@ -11,12 +11,26 @@ interface CartModalProps {
   
 }
 
+interface RootState {
+  cart: {
+      products: {
+          id: string;
+          title: string;
+          imageSrc: string;
+          offer: number;
+          quantity: number;
+      }[];
+      total: number;
+      quantity: number;
+  };
+}
+
 type Direction = "cart" | "pay";
-type ItemId = "item.id"
+
 
 const CartModal: React.FC<CartModalProps> = ({ setCartPopup }) => {
 
-const {products,total,color} = useSelector((state) => state.cart)
+const {products,total} = useSelector((state:RootState) => state.cart)
 
   const dispatch = useDispatch()
   const router = useRouter()
@@ -33,7 +47,7 @@ const {products,total,color} = useSelector((state) => state.cart)
     }
   }
 
-  const handleRemoveProduct = (id: ItemId) => {
+  const handleRemoveProduct = (id: string) => {
     dispatch(removeProduct(id))
   }
 
@@ -53,7 +67,7 @@ const {products,total,color} = useSelector((state) => state.cart)
           </div>
           <div>
             <p className='font-bold'>{item.title}</p>
-            <p className='font-bold'>{item.color}</p>
+            <p className='font-bold'></p>
             <span className='text-gray-500'>{item.quantity} x OMR {item.offer}</span>
           </div>
           <IoIosCloseCircleOutline  className='text-gray-500

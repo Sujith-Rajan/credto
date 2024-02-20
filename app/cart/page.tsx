@@ -26,7 +26,7 @@ const Cart = () => {
     const {products,total,quantity} = useSelector((state:RootState) => state.cart)
    
    
-    const handleUpdateCart = (productId, quantity) => {
+    const handleUpdateCart = (productId :string, quantity:number) => {
         dispatch(updateProductQuantity({ productId, quantity }));
         toast.success("Cart Updated")
     }

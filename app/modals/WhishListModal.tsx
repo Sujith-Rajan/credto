@@ -11,11 +11,26 @@ interface WhishListModalProps {
   setWhishPopup: () => void;
 }
 
+interface RootState {
+  wish: {
+    products: {
+      id: string;
+      title: string;
+      imageSrc: string;
+      price: number;
+      offer: number;
+      quantity: number;
+    }[];
+    total: number;
+    quantity: number;
+  };
+}
+
 type Direction = "cart" | "wish";
 
 const WhishListModal: React.FC<WhishListModalProps> = ({ setWhishPopup }) => {
 
-  const {products} = useSelector((state)=> state.wish)
+  const { products } = useSelector((state: RootState) => state.wish)
   const dispatch = useDispatch()
   const router = useRouter()
   const handleRedirect = (direction: Direction) => {
@@ -26,14 +41,14 @@ const WhishListModal: React.FC<WhishListModalProps> = ({ setWhishPopup }) => {
 
     if (direction === 'wish') {
       router.push("/wishlist")
-      
+
       setWhishPopup()
       router.refresh()
-     
+
     }
   }
 
-  const handleRemoveWish = (id) => {
+  const handleRemoveWish = (id: string) => {
     dispatch(wishRemoveProduct(id))
   }
 
@@ -46,20 +61,20 @@ const WhishListModal: React.FC<WhishListModalProps> = ({ setWhishPopup }) => {
           <h1 className='font-bold text-xl'>Wishlist</h1>
         </div>
         <hr />
-        {products.map((item)=> (
-        <div className='mt-8 flex p-4 gap-4 relative' key={item.id}>
-          <div>
-            <Image src={item.imageSrc} alt="whishlist product" width={40} height={40} />
+        {products.map((item) => (
+          <div className='mt-8 flex p-4 gap-4 relative' key={item.id}>
+            <div>
+              <Image src={item.imageSrc} alt="whishlist product" width={40} height={40} />
+            </div>
+            <div>
+              <p className='font-bold'>{item.title}</p>
+              <p className='font-bold'>256 GB -</p>
+              <span className='text-gray-500'>1 x OMR {item.offer} <>{item.price}</></span>
+            </div>
+            <IoIosCloseCircleOutline className='text-gray-500 hover:text-white bg-red-600 rounded-full ' onClick={() => handleRemoveWish(item.id)} />
           </div>
-          <div>
-            <p className='font-bold'>{item.title}</p>
-            <p className='font-bold'>256 GB -</p>
-            <span className='text-gray-500'>1 x OMR {item.offer} <>{item.price}</></span>
-          </div>
-          <IoIosCloseCircleOutline className='text-gray-500 hover:text-white bg-red-600 rounded-full ' onClick={()=>handleRemoveWish(item.id)}/>
-        </div>
-      ))}
-       
+        ))}
+
         <hr />
         <div className='flex flex-col gap-4 p-4 '>
 

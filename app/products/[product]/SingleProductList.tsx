@@ -17,6 +17,20 @@ interface SingleProductListProps {
     singleProduct?: SafeProduct | null;
 }
 
+interface RootState {
+    wish: {
+        products: {
+            id: string;
+            title: string;
+            imageSrc: string;
+            offer: number;
+            quantity: number;
+        }[];
+        total: number;
+        quantity: number;
+    };
+}
+
 type Res = "inc" | "dec"
 
 
@@ -25,7 +39,7 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
     const router = useRouter()
     const dispatch = useDispatch()
     const [color, setColor] = useState("")
-    const [cartCount, setCartCount] = useState(1)
+    const [cartCount, setCartCount] = useState<number>(1)
     const [message, setMessage] = useState(false)
     const [inWishlist, setInWishlist] = useState(false);
 
@@ -43,13 +57,13 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
 
     const handleAddToCart = () => {
         dispatch(
-            addProduct({ ...singleProduct, quantity: cartCount, color })
+            addProduct({ ...singleProduct, quantity: cartCount})
         )
         toast.success("New Product Added To Cart")
         setMessage(true)
     }
 
-    const { products } = useSelector((state) => state.wish)
+    const { products } = useSelector((state: RootState) => state.wish)
 
     useEffect(() => {
         if (singleProduct) {
@@ -58,14 +72,16 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
         }
     }, [singleProduct,products]);
     const handleWishListToggle = () => {
+        if (singleProduct && singleProduct.id) {
         if (inWishlist) {
-            dispatch(wishRemoveProduct(singleProduct.id)); // Remove from wishlist
+            dispatch(wishRemoveProduct(singleProduct.id)); 
             toast.success("Item removed from wishlist");
         } else {
-            dispatch(wishProduct(singleProduct)); // Add to wishlist
+            dispatch(wishProduct(singleProduct)); 
             toast.success("Item added to wishlist");
         }
-        setInWishlist(!inWishlist); // Toggle inWishlist state
+        setInWishlist(!inWishlist); 
+    }
     };
 
 
@@ -103,7 +119,7 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
                                             key={item.id}
 
                                         >
-                                            <Image src={item.image} alt="single product image" width={40} height={40} />
+                                            <Image src={item.image}  alt="single product image" width={40} height={40} />
                                         </div>
 
                                     </div>

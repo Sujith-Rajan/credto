@@ -11,6 +11,21 @@ import { SafeUser } from '../types';
 import { useSelector } from 'react-redux';
 
 
+
+interface RootState {
+    cart: {
+        products: {
+            id: string;
+            title: string;
+            imageSrc: string;
+            offer: number;
+            quantity: number;
+        }[];
+        total: number;
+        quantity: number;
+    };
+}
+
 interface NavbarProps {
    
     currentUser: SafeUser | null
@@ -19,7 +34,7 @@ interface NavbarProps {
 
 const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
 
-    const {products} = useSelector((state) => state.cart)
+    const {products} = useSelector((state:RootState) => state.cart)
 
     const [wishPopus, setWhishPopup] = useState(false)
     const [cartPopup, setCartPopup] = useState(false)
