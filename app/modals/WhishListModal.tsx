@@ -47,7 +47,7 @@ const WhishListModal: React.FC<WhishListModalProps> = ({ setWhishPopup }) => {
         </div>
         <hr />
         {products.map((item)=> (
-        <div className='mt-8 flex p-4 gap-4 relative'>
+        <div className='mt-8 flex p-4 gap-4 relative' key={item.id}>
           <div>
             <Image src={item.imageSrc} alt="whishlist product" width={40} height={40} />
           </div>

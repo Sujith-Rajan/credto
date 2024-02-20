@@ -47,7 +47,7 @@ const Cart = () => {
                     </thead>
                     <tbody>
                         {products.map((item)=> (
-                        <tr className='font-bold text-xs md:text-sm text-center border-b border-gray-300 whitespace-nowrap'>
+                        <tr className='font-bold text-xs md:text-sm text-center border-b border-gray-300 whitespace-nowrap' key={item.id}>
                             <td className='flex flex-col items-center md:flex-row md:gap-4 gap-2 md:items-center'>
                                 <Image src={item.imageSrc} alt='cart image' width={40} height={40}/>
                                 <p>{item.title}</p>

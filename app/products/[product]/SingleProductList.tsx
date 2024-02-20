@@ -56,7 +56,7 @@ const SingleProductList: React.FC<SingleProductListProps> = ({ singleProduct }) 
             const isInWishlist = products.find((product) => singleProduct.id)
             setInWishlist(isInWishlist);
         }
-    }, [singleProduct]);
+    }, [singleProduct,products]);
     const handleWishListToggle = () => {
         if (inWishlist) {
             dispatch(wishRemoveProduct(singleProduct.id)); // Remove from wishlist
