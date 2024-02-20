@@ -34,7 +34,7 @@ const wishListSlice = createSlice({
     initialState,
 
     reducers: {
-        wishProduct: (state, action: PayloadAction<Product>) => {
+        wishProduct: (state, action: PayloadAction<WishlistProduct>) => {
             state.quantity += 1;
             state.products.push(action.payload);
             state.total += action.payload.offer * action.payload.quantity;

@@ -3,7 +3,6 @@ import Container from '@/app/components/common/Container';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { productsData } from '@/app/data/item';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '@/app/redux/cartSlice';
 import { useRouter } from 'next/navigation';
@@ -12,6 +11,7 @@ import MessageModal from '@/app/modals/MessageModal';
 import { FaRegHeart } from "react-icons/fa"
 import { FaHeart } from "react-icons/fa"
 import { wishProduct, wishRemoveProduct } from '@/app/redux/wishListSlice';
+
 
 interface SafeProduct {
     id: string;
@@ -24,6 +24,7 @@ interface SafeProduct {
     price: number;
     offer: number;
     createdAt: Date;
+    quantity: number; 
 }
 
 interface SingleProductListProps {

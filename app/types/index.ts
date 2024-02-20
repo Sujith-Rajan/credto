@@ -10,3 +10,16 @@ User,
 
 }
 
+export interface SafeProduct {
+    id: string;
+    title: string;
+    description: string;
+    imageSrc: string;
+    category: string;
+    color: string[];
+    inStock: boolean;
+    price: number;
+    offer: number;
+    createdAt: Date;
+    quantity: number | null; 
+}
