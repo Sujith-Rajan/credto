@@ -19,7 +19,7 @@ interface NavbarProps {
 
 const Navbar:React.FC<NavbarProps> = ({currentUser}) => {
 
-    const {quantity,products} = useSelector((state) => state.cart)
+    const {products} = useSelector((state) => state.cart)
 
     const [wishPopus, setWhishPopup] = useState(false)
     const [cartPopup, setCartPopup] = useState(false)

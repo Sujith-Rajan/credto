@@ -29,6 +29,7 @@ const {products,total,color} = useSelector((state) => state.cart)
     if(direction === 'pay'){
       router.push("/payemnt")
       setCartPopup()
+      router.refresh()
     }
   }
 

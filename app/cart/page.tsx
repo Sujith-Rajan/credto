@@ -22,6 +22,7 @@ const Cart = () => {
             cartClear()
         )
         router.push("/success")
+        router.refresh()
     }
 
     const upDateCart = () => {

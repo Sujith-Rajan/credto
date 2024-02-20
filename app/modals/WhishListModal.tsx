@@ -26,7 +26,10 @@ const WhishListModal: React.FC<WhishListModalProps> = ({ setWhishPopup }) => {
 
     if (direction === 'wish') {
       router.push("/wishlist")
+      
       setWhishPopup()
+      router.refresh()
+     
     }
   }
 
