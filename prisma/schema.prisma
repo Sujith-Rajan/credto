@@ -10,27 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime?
-  image          String?
-  hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  favoriteId     String[]  @db.ObjectId
-
-   accounts     Account[]
-  cart           Cart[]
-  order          Order[]
-  
-}
 
 model Account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  id                String  @id @default(cuid()) @map("_id") 
   user              User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            String? @db.ObjectId
+  userId            String? 
   type              String
   provider          String
   providerAccountId String
@@ -44,6 +28,42 @@ model Account {
 
   @@unique([provider, providerAccountId])
 }
+
+model Session {
+  id           String   @id @default(cuid())  @map("_id")
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id             String    @id @default(cuid()) @map("_id") 
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  favoriteId     String[]  @db.ObjectId
+  sessions       Session[] 
+   accounts     Account[]
+  cart           Cart[]
+  order          Order[]
+  
+}
+
+
+
+model VerificationToken {
+  identifier String @id  @map("_id")
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
 
 model Product {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
@@ -61,7 +81,7 @@ model Product {
 model Order {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   user              User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            String? @db.ObjectId
+  userId            String?
   cart     Cart      @relation(fields: [cartId], references: [id])
   cartId   String    @db.ObjectId
   productid String
@@ -71,7 +91,7 @@ model Order {
 model Cart {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String?  @db.ObjectId
+  userId    String?  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   orders    Order[]
