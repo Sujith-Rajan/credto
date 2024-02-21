@@ -15,7 +15,8 @@ const getCurrentUser = async () => {
         const currentUser = await prisma?.user.findUnique({
             where: {
                 email: session.user.email as string
-            }
+            },
+            
         })
        
         if(!currentUser){
@@ -24,8 +25,7 @@ const getCurrentUser = async () => {
        
         return {
             ...currentUser,
-            createdAt: currentUser.createdAt.toISOString(),
-            updatedAt: currentUser.updatedAt.toISOString(),
+         
             emailVerified:
             currentUser.emailVerified?.toISOString() || null
         }

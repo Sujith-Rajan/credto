@@ -12,25 +12,26 @@ datasource db {
 
 
 model Account {
-  id                String  @id @default(cuid()) @map("_id") 
-  user              User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId            String? 
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.String
-  access_token       String? @db.String
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.String
-  session_state     String?
+  id                 String  @id @default(cuid()) @map("_id")
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  
+  access_token       String?  
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           String   @id @default(cuid())  @map("_id")
+  id           String   @id @default(cuid()) @map("_id")
   sessionToken String   @unique
   userId       String
   expires      DateTime
@@ -38,26 +39,20 @@ model Session {
 }
 
 model User {
-  id             String    @id @default(cuid()) @map("_id") 
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime?
-  image          String?
-  hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  favoriteId     String[]  @db.ObjectId
-  sessions       Session[] 
-   accounts     Account[]
-  cart           Cart[]
-  order          Order[]
-  
+  id            String    @id @default(cuid()) @map("_id")
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  isAdmin       Boolean @default(false)
+  accounts      Account[]
+  sessions      Session[]
+  order         Order[]
+  cart          Cart[]
 }
 
-
-
 model VerificationToken {
-  identifier String @id  @map("_id")
+  identifier String @id @map("_id")
   token      String   @unique
   expires    DateTime
 

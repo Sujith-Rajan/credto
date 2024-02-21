@@ -5,7 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 const LogButton = () => {
   return (
     <div>
-      <button onClick={()=>signOut()}><FiLogOut /></button>
+      <button onClick={()=>signOut()} title='Logout'><FiLogOut /></button>
     </div>
   )
 }
