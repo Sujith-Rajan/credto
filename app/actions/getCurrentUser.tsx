@@ -1,3 +1,4 @@
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
 
@@ -24,15 +25,15 @@ const getCurrentUser = async () => {
         }
        
         return {
-            ...currentUser,
-         
-            emailVerified:
-            currentUser.emailVerified?.toISOString() || null
-        }
-       
-       
-       
-      
+            id: currentUser.id,
+            name: currentUser.name,
+            email: currentUser.email,
+            emailVerified: currentUser.emailVerified
+                ? currentUser.emailVerified.toISOString()
+                : null,
+            image: currentUser.image,
+            isAdmin: currentUser.isAdmin
+        };
     }
     catch(error){
         return null

@@ -1,14 +1,8 @@
 import { Product, User} from '@prisma/client'
 
-export type SafeUser = Omit<
-User,
-"createdAt" | "updatedAt" | "emailVerified"
-> & {
-    createdAt : string,
-    updatedAt : string,
-    emailVerified : string | null
-
-}
+export type SafeUser = Omit<User, "emailVerified"> & {
+    emailVerified: string | null;
+  };
 
 export interface SafeProduct {
     id: string;
