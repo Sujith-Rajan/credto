@@ -1,13 +1,14 @@
 import React from 'react'
-import getCurrentUser from '../actions/getCurrentUser'
 import LandingPage from '../home/page'
 import Login from '../login/page'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../lib/auth'
 
 const Entry = async () => {
-    const currentUser = await getCurrentUser()
+    const session = await getServerSession(authOptions)
   return (
     <>
-      {currentUser ?<LandingPage/>:<Login/>}
+      {session ?<LandingPage/>:<Login/>}
     </>
   )
 }
