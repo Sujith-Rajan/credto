@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import getCurrentUser from "./actions/getCurrentUser";
 import PersistProvider from "./redux/Provider";
 import ToastProvider from "./lib/ToastProvider";
+import { redirect } from "next/navigation";
 
 
 const font = Nunito ({
@@ -25,8 +26,6 @@ export default async function RootLayout({
 }>) {
 
   const currentUser =  await getCurrentUser()
- 
- 
   
  
   return (
