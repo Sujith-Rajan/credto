@@ -7,7 +7,17 @@ import Footer from "./components/Footer";
 import getCurrentUser from "./actions/getCurrentUser";
 import PersistProvider from "./redux/Provider";
 import ToastProvider from "./lib/ToastProvider";
-import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./lib/auth";
+
+interface Session {
+  user: {
+    name: string;
+    email: string;
+    image?: string;
+  } | null;
+  expires: string;
+}
 
 
 const font = Nunito ({
@@ -25,15 +35,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const currentUser =  await getCurrentUser()
   
+  const session = await getServerSession(authOptions) as Session
  
   return (
     <html lang="en">
       <body className={font.className}>
       <PersistProvider>
         <ToastProvider/>
-        <Navbar currentUser={currentUser}/>
+        <Navbar image={session?.user?.image}/>
         {children}
         <Footer/>
         </PersistProvider>

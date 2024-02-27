@@ -7,7 +7,6 @@ import { FaHeart, FaShoppingCart, FaUser } from "react-icons/fa"
 import Link from 'next/link';
 import WhishListModal from '../modals/WhishListModal';
 import CartModal from '../modals/CartModal';
-import { SafeUser } from '../types';
 import { useSelector } from 'react-redux';
 import LogButton from './common/LogButton';
 
@@ -27,13 +26,10 @@ interface RootState {
     };
 }
 
-interface NavbarProps {
 
-    currentUser: SafeUser | null
 
-}
 
-const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
+const Navbar = ({ image }: { image?: string }) => {
 
     const { products } = useSelector((state: RootState) => state.cart)
 
@@ -60,9 +56,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
                         </div>
 
                         <div className='bg-gray-300 rounded-full p-1 cursor-pointer'>
-                            {currentUser
+                            {image
                                 ?
-                                <Image src={currentUser.image as string} width={30} height={30}
+                                <Image src={image} width={30} height={30}
                                     alt='user image' objectFit='contain' className='rounded-full' />
                                 :
                                 <FaUser />}

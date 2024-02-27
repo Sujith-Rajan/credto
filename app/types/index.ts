@@ -17,3 +17,4 @@ export interface SafeProduct {
     createdAt: Date;
     quantity: number | null; 
 }
+
