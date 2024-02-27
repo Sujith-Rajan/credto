@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# E-Commerce App
+
+This is a simple e-commerce app built with Next.js, TypeScript, Redux, and Tailwind CSS.
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   git clone https://github.com/Sujith-Rajan/credto.git
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.Navigate to the project directory
+  ` cd credto`
+  `npm install`  
+  `npm run dev`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3.**Technologies Used**
+  Next.js |TypeScript | Redux | Tailwind CSS | React-Redux
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. **Folder Structure**
+.
+├── components            # React components
+├── pages                 # Next.js pages
+├── public                # Public assets
+├── store                 # Redux store configuration
+├── reducers              # Redux reducers
+├── actions               # Redux actions
+├── middleware            # Redux middleware
+├── styles                # Global styles
+├── README.md             # Project README
+├── .gitignore
+├── package.json
+└── ...
+5. **Deployment**
+The app is deployed on Vercel.
+https://credto-machine-test.vercel.app/
 
-## Learn More
+6.**Screenshots**
+![Screenshot 2024-02-21 081407](https://github.com/Sujith-Rajan/credto/assets/140044515/b88c442f-a840-44d0-be52-95155bfa43a6)
+![Screenshot 2024-02-21 083440](https://github.com/Sujith-Rajan/credto/assets/140044515/fa68deb1-e991-4f13-9b6a-59c375ce43fd)
+![Screenshot 2024-02-21 083507](https://github.com/Sujith-Rajan/credto/assets/140044515/d3841dc8-f0e2-4d82-b936-07dd868134c7)
+![Screenshot 2024-02-21 083523](https://github.com/Sujith-Rajan/credto/assets/140044515/1c0c0bda-6bf0-4d72-aa91-659077cfb638)
+![Screenshot 2024-02-21 083539](https://github.com/Sujith-Rajan/credto/assets/140044515/ff0c3197-98c7-4812-bdae-f629acf79949)
+![Screenshot 2024-02-21 083603](https://github.com/Sujith-Rajan/credto/assets/140044515/4541375e-5537-40f4-8ce7-ae55773f8677)
+![Screenshot 2024-02-21 083624](https://github.com/Sujith-Rajan/credto/assets/140044515/21b588fb-bed6-4164-99a8-b4c7e3be299d)
+![Screenshot 2024-02-21 083643](https://github.com/Sujith-Rajan/credto/assets/140044515/82d552e8-94ae-4d86-9ef7-bd000b05dbe7)
+![Screenshot 2024-02-21 083710](https://github.com/Sujith-Rajan/credto/assets/140044515/cbbbc66f-2a54-498a-8425-3cf7f3ad84d6)
+![Screenshot 2024-02-21 083724](https://github.com/Sujith-Rajan/credto/assets/140044515/c6cc86c9-1609-4679-8cf2-659638b636fd)
+![Screenshot 2024-02-21 083826](https://github.com/Sujith-Rajan/credto/assets/140044515/84ab9087-ae43-4c90-abdd-72ddb958bef6)
+![Screenshot 2024-02-21 083845](https://github.com/Sujith-Rajan/credto/assets/140044515/8675c3eb-1577-41eb-be30-db23c0c8711b)
+![Screenshot 2024-02-21 083905](https://github.com/Sujith-Rajan/credto/assets/140044515/0c04186e-50ef-417b-9fb1-dcc5048b8be9)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  
