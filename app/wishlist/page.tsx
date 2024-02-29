@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -18,9 +19,18 @@ interface RootState {
         total: number;
         quantity: number;
     };
+    otp: {
+        sessionOtp: boolean;
+    }
 }
 
 const Wishlist = () => {
+
+    const router = useRouter()
+    const {sessionOtp} = useSelector ((state:RootState)=> state.otp)
+    if(!sessionOtp){
+        router.push("/")
+    }
   
    const{products} = useSelector((state: RootState)=> state.wish)
   

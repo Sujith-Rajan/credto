@@ -1,7 +1,15 @@
+import { get } from 'http'
+import { getServerSession } from 'next-auth'
 import React from 'react'
 import { FaCheck } from "react-icons/fa6"
+import { authOptions } from '../lib/auth'
+import { redirect } from 'next/navigation'
 
-const Success = () => {
+const Success = async () => {
+  const session = await getServerSession(authOptions)
+  if(!session){
+    redirect("/")
+  }
   return (
     
         <div className='h-screen flex flex-col justify-center items-center gap-8'>

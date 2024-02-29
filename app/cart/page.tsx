@@ -18,11 +18,19 @@ interface RootState {
         total: number;
         quantity: number;
     };
+    otp: {
+        sessionOtp: boolean;
+    }
 }
 
 const Cart = () => {
-    const dispatch = useDispatch()
+  
     const router = useRouter()
+    const {sessionOtp} = useSelector ((state:RootState)=> state.otp)
+    if(!sessionOtp){
+        router.push("/")
+    }
+    const dispatch = useDispatch()
     const {products,total,quantity} = useSelector((state:RootState) => state.cart)
    
    

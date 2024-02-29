@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Otp from './Otp';
-import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { addSession } from '@/app/redux/otpSlice';
@@ -16,7 +15,6 @@ const Login = () => {
   const [phoneNumber,setPhoneNumber] = useState<string>("")
   const [errorMsg,setErrorMsg] = useState<boolean>(false)
   const [showOtpInput, setShowOtpInput] = useState(false);
-  const router = useRouter()
   const dispatch = useDispatch()
  
   const handlePhoneNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +56,7 @@ const Login = () => {
     }
    
     toast.success("Login success")
+    dispatch(addSession())
     signIn("credentials",{otp})
   }
  

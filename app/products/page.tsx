@@ -3,9 +3,15 @@ import Container from '../components/common/Container'
 import Image from 'next/image'
 import { getProducts } from '../actions/getProducts'
 import Link from 'next/link'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../lib/auth'
+import { redirect } from 'next/navigation'
 
 const Products = async () => {
-    
+    const session = await getServerSession(authOptions)
+    if(!session){
+        redirect("/")
+    }
     const products = await getProducts()
    
     return (
