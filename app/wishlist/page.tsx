@@ -1,4 +1,5 @@
 "use client"
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -27,10 +28,10 @@ interface RootState {
 const Wishlist = () => {
 
     const router = useRouter()
-    const {sessionOtp} = useSelector ((state:RootState)=> state.otp)
-    if(!sessionOtp){
+    const {data:session} = useSession()
+     if(!session){
         router.push("/")
-    }
+     }
   
    const{products} = useSelector((state: RootState)=> state.wish)
   

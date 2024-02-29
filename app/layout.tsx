@@ -9,6 +9,7 @@ import PersistProvider from "./redux/Provider";
 import ToastProvider from "./lib/ToastProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./lib/auth";
+import AuthProvider from "./lib/Providers";
 
 
 interface Session {
@@ -42,12 +43,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+        <AuthProvider>
       <PersistProvider>
         <ToastProvider/>
         <Navbar image={session?.user?.image}/>
         {children}
         <Footer/>
         </PersistProvider>
+        </AuthProvider>
         </body>
     </html>
   );

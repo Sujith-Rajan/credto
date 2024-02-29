@@ -6,8 +6,8 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Otp from './Otp';
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
-import { addSession } from '@/app/redux/otpSlice';
+
+
 
 
 const Login = () => {
@@ -15,7 +15,7 @@ const Login = () => {
   const [phoneNumber,setPhoneNumber] = useState<string>("")
   const [errorMsg,setErrorMsg] = useState<boolean>(false)
   const [showOtpInput, setShowOtpInput] = useState(false);
-  const dispatch = useDispatch()
+
  
   const handlePhoneNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPhoneNumber(event.target.value)
@@ -56,7 +56,6 @@ const Login = () => {
     }
    
     toast.success("Login success")
-    dispatch(addSession())
     signIn("credentials",{otp})
   }
  

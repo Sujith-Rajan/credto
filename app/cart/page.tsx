@@ -1,10 +1,11 @@
 "use client"
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartClear, updateProductQuantity } from '../redux/cartSlice'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { useSession } from 'next-auth/react'
 
 interface RootState {
     cart: {
@@ -24,12 +25,12 @@ interface RootState {
 }
 
 const Cart = () => {
-  
+    
     const router = useRouter()
-    const {sessionOtp} = useSelector ((state:RootState)=> state.otp)
-    if(!sessionOtp){
+    const {data:session} = useSession()
+     if(!session){
         router.push("/")
-    }
+     }
     const dispatch = useDispatch()
     const {products,total,quantity} = useSelector((state:RootState) => state.cart)
    

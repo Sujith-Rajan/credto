@@ -8,7 +8,7 @@ const LogButton = () => {
   const dispatch = useDispatch()
   return (
     <div>
-      <button onClick={()=>{signOut();dispatch(clearSession())}} title='Logout'><FiLogOut /></button>
+      <button onClick={()=>signOut()} title='Logout'><FiLogOut /></button>
     </div>
   )
 }
