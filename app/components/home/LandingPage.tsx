@@ -1,8 +1,8 @@
 import React from 'react'
-import Banner from '../components/Banner'
-import Offer from '../components/Offer'
-import Products from '../components/Products'
-import Brands from '../components/Brands'
+import Banner from '../Banner'
+import Offer from '../Offer'
+import Products from '../Products'
+import Brands from '../Brands'
 
 
 const LandingPage =async () => {

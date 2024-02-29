@@ -10,6 +10,7 @@ import ToastProvider from "./lib/ToastProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./lib/auth";
 
+
 interface Session {
   user: {
     name: string;

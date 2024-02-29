@@ -1,20 +1,16 @@
-import { getServerSession } from "next-auth";
-import LandingPage from "./home/page";
-import Login from "./login/page";
-import { authOptions } from "./lib/auth";
+
+import Entry from "./components/entry/Entry";
+
+
 
 export default async function Home() {
 
-  const session = await getServerSession(authOptions)
+
  
   return (
     <div>
-      {session 
-      ?
-    <LandingPage/>
-    :
-    <Login/>
-   }
+      <Entry/>
     </div>
   );
 }
+

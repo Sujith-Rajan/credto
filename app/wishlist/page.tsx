@@ -23,7 +23,7 @@ interface RootState {
 const Wishlist = () => {
   
    const{products} = useSelector((state: RootState)=> state.wish)
-   console.log(products)
+  
   return (
     <div className='h-auto pt-20 md:p-36 '>
         <div className='bg-gray-200 flex items-center justify-center  p-2 lg:p-8'>
